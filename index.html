@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estado de la fábrica</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #161923;
+    --panel-2: #1d212e;
+    --border: #2a2f3d;
+    --text: #e8eaf0;
+    --text-dim: #9aa0b4;
+    --accent: #6c8cff;
+    --red: #ff6b6b;
+    --amber: #ffb454;
+    --green: #4fd08a;
+    --blue: #56b6f5;
+    --gray: #7a8095;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f4f5f8;
+      --panel: #ffffff;
+      --panel-2: #f0f1f5;
+      --border: #dde0e8;
+      --text: #1a1d27;
+      --text-dim: #656b80;
+      --accent: #3d5afe;
+      --red: #d64545;
+      --amber: #c97a12;
+      --green: #17915a;
+      --blue: #1878b0;
+      --gray: #666c80;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 24px 20px 80px; }
+  header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+  h1 { font-size: 1.4rem; margin: 0; }
+  .meta { color: var(--text-dim); font-size: 0.85rem; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 24px; }
+  .kpi { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .kpi .n { font-size: 1.6rem; font-weight: 700; }
+  .kpi .l { font-size: 0.78rem; color: var(--text-dim); margin-top: 2px; }
+  .kpi.pausado .n { color: var(--red); }
+  .kpi.pr .n { color: var(--blue); }
+  .kpi.aprobar .n { color: var(--amber); }
+  .kpi.nuevo .n { color: var(--accent); }
+  .kpi.estancado .n { color: var(--gray); }
+  .controls { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; align-items: center; }
+  select, input[type="search"] {
+    background: var(--panel); color: var(--text); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 12px; font-size: 0.85rem;
+  }
+  input[type="search"] { min-width: 220px; }
+  .toggle { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: var(--text-dim); cursor: pointer; user-select: none; }
+  .errors { background: rgba(255,107,107,0.12); border: 1px solid var(--red); color: var(--red); border-radius: 8px; padding: 10px 14px; margin-bottom: 20px; font-size: 0.85rem; }
+  .repo-block { margin-bottom: 32px; }
+  .repo-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .repo-title .badge { font-size: 0.72rem; font-weight: 500; color: var(--text-dim); background: var(--panel-2); border-radius: 999px; padding: 2px 10px; }
+  .board { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+  .col { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 10px; min-height: 60px; }
+  .col h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-dim); margin: 4px 6px 10px; display: flex; justify-content: space-between; }
+  .col.pausado { border-top: 3px solid var(--red); }
+  .col.pr { border-top: 3px solid var(--blue); }
+  .col.aprobar { border-top: 3px solid var(--amber); }
+  .col.nuevo { border-top: 3px solid var(--accent); }
+  .col.estancado { border-top: 3px solid var(--gray); }
+  .card {
+    display: block; background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 12px; margin-bottom: 8px; text-decoration: none; color: inherit;
+    transition: border-color 0.15s;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card .num { font-size: 0.72rem; color: var(--text-dim); }
+  .card .title { font-size: 0.86rem; font-weight: 600; margin: 2px 0 4px; line-height: 1.3; }
+  .card .motivo { font-size: 0.78rem; color: var(--text-dim); line-height: 1.35; }
+  .card .fecha { font-size: 0.7rem; color: var(--text-dim); margin-top: 6px; }
+  .empty-col { color: var(--text-dim); font-size: 0.78rem; padding: 6px; }
+  details.completado { margin-top: 10px; }
+  details.completado summary { cursor: pointer; font-size: 0.82rem; color: var(--text-dim); }
+  .state-msg { color: var(--text-dim); padding: 40px 0; text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>📋 Estado de la fábrica de software</h1>
+    <div class="meta" id="meta">cargando…</div>
+  </header>
+
+  <div id="errors-box"></div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="controls">
+    <select id="filtro-repo"><option value="">Todos los repos</option></select>
+    <input type="search" id="buscar" placeholder="Buscar por título o número…">
+    <label class="toggle"><input type="checkbox" id="ocultar-estancado"> Ocultar estancados</label>
+  </div>
+
+  <div id="contenido"><div class="state-msg">Cargando data/estado.json…</div></div>
+</div>
+
+<script>
+const CATS = [
+  { key: "pausado_esperando_decision", label: "Pausado — esperando decisión", cls: "pausado" },
+  { key: "pr_esperando_revision_merge", label: "PR — revisión o merge", cls: "pr" },
+  { key: "pendiente_de_aprobar", label: "Pendiente de aprobar", cls: "aprobar" },
+  { key: "recien_abierto_sin_plan", label: "Recién abierto, sin plan", cls: "nuevo" },
+  { key: "estancado", label: "Estancado", cls: "estancado" },
+];
+
+let DATA = null;
+
+function fmtFecha(iso) {
+  if (!iso) return "";
+  try {
+    const d = new Date(iso);
+    return d.toLocaleString("es-CO", { dateStyle: "medium", timeStyle: "short" });
+  } catch (e) { return iso; }
+}
+
+function card(item) {
+  const icon = item.tipo === "pr" ? "🔀" : "📝";
+  const motivo = item.motivo ? `<div class="motivo">${escapeHtml(item.motivo)}</div>` : "";
+  const fecha = item.ultima_actividad ? `<div class="fecha">Última actividad: ${escapeHtml(item.ultima_actividad)}</div>` : "";
+  return `<a class="card" href="${item.url || '#'}" target="_blank" rel="noopener" data-titulo="${escapeHtml((item.titulo||'').toLowerCase())}" data-numero="${item.numero||''}">
+    <div class="num">${icon} #${item.numero ?? "?"}</div>
+    <div class="title">${escapeHtml(item.titulo || "(sin título)")}</div>
+    ${motivo}${fecha}
+  </a>`;
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+}
+
+function render() {
+  if (!DATA) return;
+  const repoFiltro = document.getElementById("filtro-repo").value;
+  const busq = document.getElementById("buscar").value.trim().toLowerCase();
+  const ocultarEstancado = document.getElementById("ocultar-estancado").checked;
+
+  const repos = DATA.repos.filter(r => !repoFiltro || r.nombre === repoFiltro);
+
+  // KPIs (sobre todos los repos visibles, sin filtro de búsqueda)
+  const totales = {};
+  CATS.forEach(c => totales[c.key] = 0);
+  repos.forEach(r => CATS.forEach(c => totales[c.key] += (r.categorias[c.key] || []).length));
+
+  document.getElementById("kpis").innerHTML = CATS.map(c => `
+    <div class="kpi ${c.cls}">
+      <div class="n">${totales[c.key]}</div>
+      <div class="l">${c.label}</div>
+    </div>`).join("");
+
+  const html = repos.map(r => {
+    const cols = CATS.map(c => {
+      if (c.key === "estancado" && ocultarEstancado) return "";
+      let items = r.categorias[c.key] || [];
+      if (busq) items = items.filter(i =>
+        String(i.numero).includes(busq) || (i.titulo||"").toLowerCase().includes(busq));
+      const cardsHtml = items.length
+        ? items.map(card).join("")
+        : `<div class="empty-col">ninguno</div>`;
+      return `<div class="col ${c.cls}"><h3>${c.label}<span>${items.length}</span></h3>${cardsHtml}</div>`;
+    }).join("");
+
+    const completados = r.completado_ayer || [];
+    const completadosHtml = completados.length
+      ? `<details class="completado"><summary>✅ Completado ayer (${completados.length})</summary>${completados.map(card).join("")}</details>`
+      : "";
+
+    return `<div class="repo-block">
+      <div class="repo-title">${escapeHtml(r.nombre)} <span class="badge">${Object.values(r.categorias).reduce((a,arr)=>a+arr.length,0)} abiertos</span></div>
+      <div class="board">${cols}</div>
+      ${completadosHtml}
+    </div>`;
+  }).join("");
+
+  document.getElementById("contenido").innerHTML = html || `<div class="state-msg">Sin repos para mostrar.</div>`;
+}
+
+function poblarFiltroRepo() {
+  const sel = document.getElementById("filtro-repo");
+  DATA.repos.forEach(r => {
+    const opt = document.createElement("option");
+    opt.value = r.nombre;
+    opt.textContent = r.nombre;
+    sel.appendChild(opt);
+  });
+}
+
+async function cargar() {
+  try {
+    const res = await fetch("data/estado.json", { cache: "no-store" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    DATA = await res.json();
+  } catch (e) {
+    document.getElementById("contenido").innerHTML =
+      `<div class="state-msg">No se pudo cargar data/estado.json todavía (${escapeHtml(e.message)}).<br>Va a aparecer acá después de la primera corrida de la Routine reporte-diario-fabrica.</div>`;
+    document.getElementById("meta").textContent = "sin datos";
+    return;
+  }
+
+  document.getElementById("meta").textContent = "Generado: " + fmtFecha(DATA.generado_en);
+
+  const errores = DATA.errores || [];
+  if (errores.length) {
+    document.getElementById("errors-box").innerHTML =
+      `<div class="errors"><strong>⚠️ Errores en la última corrida:</strong><ul>${errores.map(e => `<li>${escapeHtml(e)}</li>`).join("")}</ul></div>`;
+  }
+
+  poblarFiltroRepo();
+  render();
+
+  document.getElementById("filtro-repo").addEventListener("change", render);
+  document.getElementById("buscar").addEventListener("input", render);
+  document.getElementById("ocultar-estancado").addEventListener("change", render);
+}
+
+cargar();
+</script>
+</body>
+</html>
