@@ -1,29 +1,30 @@
 {
-  "generado_en": "2026-09-02T08:00:00-05:00",
+  "generado_en": "2026-09-05T11:21:46-05:00",
   "repos": [
     {
       "nombre": "Bi_fabrica",
       "categorias": {
         "pausado_esperando_decision": [
-          {"numero": 25, "tipo": "issue", "titulo": "[Solicitud]: Es una prueba de N8N con Telegram, no hacer nada", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/25", "motivo": "El planificador pidió confirmación humana para cerrarlo, sin respuesta.", "ultima_actividad": "2026-08-26"},
-          {"numero": 24, "tipo": "issue", "titulo": "[Solicitud]: Prueba con Telegram y N8N para crear las Issues", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/24", "motivo": "El planificador dejó pregunta abierta sobre si cerrarlo, sin respuesta.", "ultima_actividad": "2026-08-26"},
-          {"numero": 23, "tipo": "issue", "titulo": "[Solicitud]: Solicitud", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/23", "motivo": "El planificador pidió reformular el Objetivo, sin respuesta.", "ultima_actividad": "2026-08-26"},
-          {"numero": 22, "tipo": "issue", "titulo": "[Solicitud]: Solicitud", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/22", "motivo": "El planificador pidió reformular el Objetivo, sin respuesta.", "ultima_actividad": "2026-08-26"},
-          {"numero": 21, "tipo": "issue", "titulo": "[Solicitud]: Esto es una prueba desde N8N, no hacer nada", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/21", "motivo": "El planificador pidió confirmación para cerrarlo, sin respuesta.", "ultima_actividad": "2026-08-26"},
-          {"numero": 18, "tipo": "issue", "titulo": "Cambio de configuración", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/18", "motivo": "Se aprobó pero la Routine no se disparó porque el Issue no tiene la label solicitud.", "ultima_actividad": "2026-08-18"},
-          {"numero": 7, "tipo": "issue", "titulo": "[Solicitud]: tooltip 2", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/7", "motivo": "El planificador no puede avanzar sin aclarar a qué KPI aplica el pedido.", "ultima_actividad": "2026-08-13"},
-          {"numero": 5, "tipo": "issue", "titulo": "[Solicitud]: cambio", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/5", "motivo": "El planificador dejó preguntas abiertas sobre a qué KPI aplica y el texto del tooltip.", "ultima_actividad": "2026-08-11"}
+          {"numero": 18, "tipo": "issue", "titulo": "Cambio de configuración", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/18", "motivo": "Bot avisó que no disparó la Routine porque el Issue no tiene la label solicitud, tras un /aprobar del humano; nadie respondió después.", "ultima_actividad": "2026-08-18"},
+          {"numero": 21, "tipo": "issue", "titulo": "[Solicitud]: Esto es una prueba desde N8N, no hacer nada", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/21", "motivo": "Planificador pregunta si corresponde cerrarlo como prueba; sin respuesta.", "ultima_actividad": "2026-08-26"},
+          {"numero": 22, "tipo": "issue", "titulo": "[Solicitud]: Solicitud", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/22", "motivo": "Planificador pide reformular el Objetivo (vacío/placeholder); sin respuesta.", "ultima_actividad": "2026-08-26"},
+          {"numero": 23, "tipo": "issue", "titulo": "[Solicitud]: Solicitud", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/23", "motivo": "Planificador pide reformular el Objetivo (vacío/placeholder); sin respuesta.", "ultima_actividad": "2026-08-26"},
+          {"numero": 24, "tipo": "issue", "titulo": "[Solicitud]: Prueba con Telegram y N8N para crear las Issues", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/24", "motivo": "Planificador pregunta si cerrar como prueba de infraestructura; sin respuesta.", "ultima_actividad": "2026-08-26"},
+          {"numero": 25, "tipo": "issue", "titulo": "[Solicitud]: Es una prueba de N8N con Telegram, no hacer nada", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/25", "motivo": "Planificador recomienda que un humano lo cierre como prueba; sin respuesta.", "ultima_actividad": "2026-08-26"}
         ],
         "pr_esperando_revision_merge": [],
-        "pendiente_de_aprobar": [],
+        "pendiente_de_aprobar": [
+          {"numero": 5, "tipo": "issue", "titulo": "[Solicitud]: cambio", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/5", "motivo": "Plan generado por el planificador, sin comando /aprobar todavía.", "ultima_actividad": "2026-08-11"},
+          {"numero": 7, "tipo": "issue", "titulo": "[Solicitud]: tooltip 2", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/7", "motivo": "Plan generado, sin /aprobar.", "ultima_actividad": "2026-08-13"}
+        ],
         "recien_abierto_sin_plan": [
           {"numero": 10, "tipo": "issue", "titulo": "[Solicitud]: nuevo tooltip", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/10", "motivo": "Abierto sin ningún comentario del planificador todavía.", "ultima_actividad": "2026-08-13"}
         ],
         "cierre_administrativo_pendiente": [
-          {"numero": 19, "tipo": "issue", "titulo": "[Solicitud]: Nuevo tooltip", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/19", "motivo": "PR #20 ya mergeado, el Issue sigue abierto — falta cerrarlo a mano.", "ultima_actividad": "2026-08-20"},
-          {"numero": 16, "tipo": "issue", "titulo": "[Solicitud]: Tooltip pls", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/16", "motivo": "Ciclo mergeado (PR #17), pero quedó un pedido nuevo sin procesar en el último comentario — revisar antes de cerrar.", "ultima_actividad": "2026-08-18"},
-          {"numero": 14, "tipo": "issue", "titulo": "[Solicitud]: cambio", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/14", "motivo": "PR #15 mergeado, Issue sigue abierto sin cierre.", "ultima_actividad": "2026-08-18"},
-          {"numero": 11, "tipo": "issue", "titulo": "[Solicitud]: cambio", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/11", "motivo": "PR #12 mergeado, Issue sigue abierto sin cierre.", "ultima_actividad": "2026-08-14"}
+          {"numero": 11, "tipo": "issue", "titulo": "[Solicitud]: cambio", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/11", "motivo": "Resuelto por el PR #12 (mergeado 2026-08-14), Issue sigue abierto.", "ultima_actividad": "2026-08-14"},
+          {"numero": 14, "tipo": "issue", "titulo": "[Solicitud]: cambio", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/14", "motivo": "Resuelto por el PR #15 (mergeado 2026-08-18), Issue sigue abierto.", "ultima_actividad": "2026-08-18"},
+          {"numero": 16, "tipo": "issue", "titulo": "[Solicitud]: Tooltip pls", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/16", "motivo": "Resuelto por el PR #17 (mergeado 2026-08-18), Issue sigue abierto; además tiene un pedido adicional sin procesar en el último comentario.", "ultima_actividad": "2026-08-18"},
+          {"numero": 19, "tipo": "issue", "titulo": "[Solicitud]: Nuevo tooltip", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/19", "motivo": "Resuelto por el PR #20 (mergeado 2026-08-20), Issue sigue abierto.", "ultima_actividad": "2026-08-20"}
         ],
         "estancado": []
       },
@@ -33,12 +34,12 @@
       "nombre": "WebChat_Fabrica",
       "categorias": {
         "pausado_esperando_decision": [
-          {"numero": 14, "tipo": "issue", "titulo": "[Solicitud]: prueba de funcionamiento del flujo de n8n con Telegram", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/14", "motivo": "El planificador señaló que este repo no tiene n8n/Telegram y pidió decidir si corresponde cerrarlo.", "ultima_actividad": "2026-08-26"},
-          {"numero": 13, "tipo": "issue", "titulo": "[Solicitud]: Prueba de Telegram para mirar el flujo, no va a hacer nada", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/13", "motivo": "El planificador pidió confirmar cierre, sin respuesta.", "ultima_actividad": "2026-08-26"},
-          {"numero": 12, "tipo": "issue", "titulo": "[Solicitud]: Esto sólo es una prueba desde N8N para probar las peticiones", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/12", "motivo": "El planificador pidió confirmar cierre, sin respuesta.", "ultima_actividad": "2026-08-26"},
-          {"numero": 11, "tipo": "issue", "titulo": "[Solicitud]: Nuevo", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/11", "motivo": "El planificador pidió que se especifique el pedido real.", "ultima_actividad": "2026-08-26"},
-          {"numero": 10, "tipo": "issue", "titulo": "[Solicitud]: Esto es una prueba de voz de Telegram, no implementar nada", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/10", "motivo": "El planificador recomendó cerrarlo como prueba, sin respuesta.", "ultima_actividad": "2026-08-26"},
-          {"numero": 9, "tipo": "issue", "titulo": "[Solicitud]: Cambio desde n8n", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/9", "motivo": "El planificador pidió confirmar cierre, sin respuesta.", "ultima_actividad": "2026-08-25"}
+          {"numero": 9, "tipo": "issue", "titulo": "[Solicitud]: Cambio desde n8n", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/9", "motivo": "Planificador pregunta si cerrar como prueba sin acción; sin respuesta.", "ultima_actividad": "2026-08-25"},
+          {"numero": 10, "tipo": "issue", "titulo": "[Solicitud]: Esto es una prueba del voz de Telegram, no implementar na...", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/10", "motivo": "Planificador recomienda cerrar como prueba de canal de voz; sin respuesta.", "ultima_actividad": "2026-08-26"},
+          {"numero": 11, "tipo": "issue", "titulo": "[Solicitud]: Nuevo", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/11", "motivo": "Planificador pide especificar qué se quiere (\"Nuevo\" no alcanza); sin respuesta.", "ultima_actividad": "2026-08-26"},
+          {"numero": 12, "tipo": "issue", "titulo": "[Solicitud]: Esto sólo es una prueba desde N8N para probar las peticiones", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/12", "motivo": "Planificador pregunta si cerrar sin desarrollo; sin respuesta.", "ultima_actividad": "2026-08-26"},
+          {"numero": 13, "tipo": "issue", "titulo": "[Solicitud]: Prueba de Telegram para mirar el flujo no va a hacer nada", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/13", "motivo": "Planificador pregunta si cerrar como prueba/no-acción; sin respuesta.", "ultima_actividad": "2026-08-26"},
+          {"numero": 14, "tipo": "issue", "titulo": "[Solicitud]: prueba de funcionamiento del flujo de n8n con Telegram", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/14", "motivo": "Planificador señala que este repo no tiene n8n/Telegram y pregunta si corresponde cerrarlo; sin respuesta.", "ultima_actividad": "2026-08-26"}
         ],
         "pr_esperando_revision_merge": [],
         "pendiente_de_aprobar": [],
@@ -49,7 +50,5 @@
       "completado_ayer": []
     }
   ],
-  "errores": [
-    "Seed inicial cargado a mano con los datos de la corrida del 2026-09-02, no generado por la Routine — se reemplaza automáticamente en la próxima corrida programada."
-  ]
+  "errores": []
 }
