@@ -19,12 +19,13 @@
         "recien_abierto_sin_plan": [
           {"numero": 10, "tipo": "issue", "titulo": "[Solicitud]: nuevo tooltip", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/10", "motivo": "Abierto sin ningún comentario del planificador todavía.", "ultima_actividad": "2026-08-13"}
         ],
-        "estancado": [
+        "cierre_administrativo_pendiente": [
           {"numero": 19, "tipo": "issue", "titulo": "[Solicitud]: Nuevo tooltip", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/19", "motivo": "PR #20 ya mergeado, el Issue sigue abierto — falta cerrarlo a mano.", "ultima_actividad": "2026-08-20"},
-          {"numero": 16, "tipo": "issue", "titulo": "[Solicitud]: Tooltip pls", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/16", "motivo": "Ciclo mergeado (PR #17), pero quedó un pedido nuevo sin procesar en el último comentario.", "ultima_actividad": "2026-08-18"},
+          {"numero": 16, "tipo": "issue", "titulo": "[Solicitud]: Tooltip pls", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/16", "motivo": "Ciclo mergeado (PR #17), pero quedó un pedido nuevo sin procesar en el último comentario — revisar antes de cerrar.", "ultima_actividad": "2026-08-18"},
           {"numero": 14, "tipo": "issue", "titulo": "[Solicitud]: cambio", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/14", "motivo": "PR #15 mergeado, Issue sigue abierto sin cierre.", "ultima_actividad": "2026-08-18"},
           {"numero": 11, "tipo": "issue", "titulo": "[Solicitud]: cambio", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/11", "motivo": "PR #12 mergeado, Issue sigue abierto sin cierre.", "ultima_actividad": "2026-08-14"}
-        ]
+        ],
+        "estancado": []
       },
       "completado_ayer": []
     },
@@ -42,6 +43,7 @@
         "pr_esperando_revision_merge": [],
         "pendiente_de_aprobar": [],
         "recien_abierto_sin_plan": [],
+        "cierre_administrativo_pendiente": [],
         "estancado": []
       },
       "completado_ayer": []
