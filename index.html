@@ -245,12 +245,16 @@
   <div class="controls">
     <select id="filtro-repo"><option value="">Todos los repos</option></select>
     <input type="search" id="buscar" placeholder="Buscar por título o número…">
-    <label class="toggle"><input type="checkbox" id="ocultar-estancado"> Ocultar estancados</label>
     <div class="spacer"></div>
     <div class="field">
       <span class="flabel">Ver fecha:</span>
       <select id="historial-fecha"><option value="">Hoy (en vivo)</option></select>
     </div>
+  </div>
+
+  <div class="controls" id="controles-categorias">
+    <span class="flabel">Mostrar:</span>
+    <span id="toggles-categorias"></span>
   </div>
 
   <div id="contenido"><div class="state-msg">Cargando data/estado.json…</div></div>
@@ -283,6 +287,7 @@ const CATS = [
 let DATA = null;
 let listenersAttached = false;
 let vista = "resumen";
+const categoriasOcultas = new Set(); // vacío = se muestran todas
 
 function fmtFecha(iso) {
   if (!iso) return "";
@@ -318,13 +323,13 @@ function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 }
 
-// Devuelve, por repo, las categorías ya filtradas por "ocultar estancados" —
-// un solo lugar que decide esto, para que KPIs, badges y tabla nunca queden
-// desincronizados entre sí.
-function categoriasEfectivas(repo, ocultarEstancado) {
+// Devuelve, por repo, las categorías ya filtradas por los toggles "Mostrar" —
+// un solo lugar que decide esto, para que KPIs, badges, tabla y columnas
+// nunca queden desincronizados entre sí.
+function categoriasEfectivas(repo) {
   const out = {};
   CATS.forEach(c => {
-    out[c.key] = (c.key === "estancado" && ocultarEstancado) ? [] : (repo.categorias[c.key] || []);
+    out[c.key] = categoriasOcultas.has(c.key) ? [] : (repo.categorias[c.key] || []);
   });
   return out;
 }
@@ -332,13 +337,12 @@ function categoriasEfectivas(repo, ocultarEstancado) {
 function render() {
   if (!DATA) return;
   const repoFiltro = document.getElementById("filtro-repo").value;
-  const ocultarEstancado = document.getElementById("ocultar-estancado").checked;
 
   const reposParaKpis = (DATA.repos || []); // los KPIs siempre son de TODOS los repos, no del filtro de repo
   const totales = {};
   CATS.forEach(c => totales[c.key] = 0);
   reposParaKpis.forEach(r => {
-    const efec = categoriasEfectivas(r, ocultarEstancado);
+    const efec = categoriasEfectivas(r);
     CATS.forEach(c => totales[c.key] += efec[c.key].length);
   });
 
@@ -353,11 +357,11 @@ function render() {
     document.getElementById(id).style.display = vista === "detalle" ? "" : "none";
   });
 
-  if (vista === "resumen") renderResumen(ocultarEstancado);
-  else renderDetalle(repoFiltro, ocultarEstancado);
+  if (vista === "resumen") renderResumen();
+  else renderDetalle(repoFiltro);
 }
 
-function renderResumen(ocultarEstancado) {
+function renderResumen() {
   const repos = DATA.repos || [];
   if (!repos.length) {
     document.getElementById("contenido").innerHTML = `<div class="state-msg">Sin repos para mostrar.</div>`;
@@ -369,7 +373,7 @@ function renderResumen(ocultarEstancado) {
   let totalGeneral = 0;
 
   const filas = repos.map(r => {
-    const efec = categoriasEfectivas(r, ocultarEstancado);
+    const efec = categoriasEfectivas(r);
     let totalRepo = 0;
     const celdas = CATS.map(c => {
       const n = efec[c.key].length;
@@ -404,14 +408,14 @@ function renderResumen(ocultarEstancado) {
     </div>`;
 }
 
-function renderDetalle(repoFiltro, ocultarEstancado) {
+function renderDetalle(repoFiltro) {
   const busq = document.getElementById("buscar").value.trim().toLowerCase();
   const repos = (DATA.repos || []).filter(r => !repoFiltro || r.nombre === repoFiltro);
 
   const html = repos.map(r => {
-    const efec = categoriasEfectivas(r, ocultarEstancado);
+    const efec = categoriasEfectivas(r);
     const cols = CATS.map(c => {
-      if (c.key === "estancado" && ocultarEstancado) return "";
+      if (categoriasOcultas.has(c.key)) return "";
       let items = efec[c.key];
       if (busq) items = items.filter(i =>
         String(i.numero).includes(busq) || (i.titulo||"").toLowerCase().includes(busq));
@@ -459,6 +463,22 @@ function mostrarErrores(errores) {
   }
 }
 
+function generarTogglesCategorias() {
+  const cont = document.getElementById("toggles-categorias");
+  cont.innerHTML = CATS.map(c => `
+    <label class="toggle" style="margin-right:14px;">
+      <input type="checkbox" data-cat="${c.key}" checked> ${c.label}
+    </label>`).join("");
+  cont.querySelectorAll("input[type=checkbox]").forEach(cb => {
+    cb.addEventListener("change", () => {
+      const key = cb.getAttribute("data-cat");
+      if (cb.checked) categoriasOcultas.delete(key);
+      else categoriasOcultas.add(key);
+      render();
+    });
+  });
+}
+
 function cambiarVista(nueva) {
   vista = nueva;
   document.getElementById("tab-resumen").classList.toggle("active", vista === "resumen");
@@ -473,7 +493,6 @@ function attachListeners() {
   document.getElementById("tab-detalle").addEventListener("click", () => cambiarVista("detalle"));
   document.getElementById("filtro-repo").addEventListener("change", render);
   document.getElementById("buscar").addEventListener("input", render);
-  document.getElementById("ocultar-estancado").addEventListener("change", render);
   document.getElementById("historial-fecha").addEventListener("change", (e) => {
     const sha = e.target.value;
     if (!sha) { cargarEnVivo(); ocultarBannerHistorico(); }
@@ -548,6 +567,7 @@ async function cargarHistorialDisponible() {
 }
 
 async function iniciar() {
+  generarTogglesCategorias();
   attachListeners();
   await cargarEnVivo();
   cargarHistorialDisponible();
