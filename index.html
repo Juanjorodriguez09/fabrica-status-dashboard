@@ -113,11 +113,29 @@
   .kpi.nuevo .n { color: var(--accent); } .kpi.nuevo .ic-wrap { background: var(--accent-soft); color: var(--accent); }
   .kpi.estancado .n { color: var(--gray); } .kpi.estancado .ic-wrap { background: var(--gray-soft); color: var(--gray); }
 
+  .tabs { display: flex; gap: 6px; margin-bottom: 18px; }
+  .tab-btn {
+    background: var(--panel); color: var(--text-dim); border: 1px solid var(--border);
+    border-radius: 999px; padding: 8px 18px; font-size: 0.85rem; font-weight: 600;
+    cursor: pointer; font-family: inherit;
+  }
+  .tab-btn.active { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+
   .controls {
     display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; align-items: center;
     background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
     padding: 12px 14px;
   }
+
+  .resumen-table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+  .resumen-table th, .resumen-table td { padding: 12px 14px; text-align: left; font-size: 0.85rem; border-bottom: 1px solid var(--border-soft); }
+  .resumen-table th { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-dim); font-weight: 700; background: var(--panel-2); }
+  .resumen-table td.num-cell { text-align: center; font-variant-numeric: tabular-nums; font-weight: 700; }
+  .resumen-table tr:last-child td { border-bottom: none; }
+  .resumen-table tr.total-row td { font-weight: 800; background: var(--panel-2); border-top: 2px solid var(--border); }
+  .resumen-table td.repo-cell { font-weight: 650; }
+  .resumen-table td.repo-cell a { color: inherit; text-decoration: none; }
+  .resumen-table .zero { color: var(--text-faint); font-weight: 500; }
   select, input[type="search"] {
     background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
     border-radius: var(--radius-sm); padding: 8px 12px; font-size: 0.85rem; font-family: inherit;
@@ -219,6 +237,11 @@
 
   <div class="kpis" id="kpis"></div>
 
+  <div class="tabs">
+    <button class="tab-btn active" id="tab-resumen" type="button">Resumen</button>
+    <button class="tab-btn" id="tab-detalle" type="button">Detalle por proyecto</button>
+  </div>
+
   <div class="controls">
     <select id="filtro-repo"><option value="">Todos los repos</option></select>
     <input type="search" id="buscar" placeholder="Buscar por título o número…">
@@ -259,6 +282,7 @@ const CATS = [
 
 let DATA = null;
 let listenersAttached = false;
+let vista = "resumen";
 
 function fmtFecha(iso) {
   if (!iso) return "";
@@ -294,17 +318,29 @@ function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 }
 
+// Devuelve, por repo, las categorías ya filtradas por "ocultar estancados" —
+// un solo lugar que decide esto, para que KPIs, badges y tabla nunca queden
+// desincronizados entre sí.
+function categoriasEfectivas(repo, ocultarEstancado) {
+  const out = {};
+  CATS.forEach(c => {
+    out[c.key] = (c.key === "estancado" && ocultarEstancado) ? [] : (repo.categorias[c.key] || []);
+  });
+  return out;
+}
+
 function render() {
   if (!DATA) return;
   const repoFiltro = document.getElementById("filtro-repo").value;
-  const busq = document.getElementById("buscar").value.trim().toLowerCase();
   const ocultarEstancado = document.getElementById("ocultar-estancado").checked;
 
-  const repos = (DATA.repos || []).filter(r => !repoFiltro || r.nombre === repoFiltro);
-
+  const reposParaKpis = (DATA.repos || []); // los KPIs siempre son de TODOS los repos, no del filtro de repo
   const totales = {};
   CATS.forEach(c => totales[c.key] = 0);
-  repos.forEach(r => CATS.forEach(c => totales[c.key] += (r.categorias[c.key] || []).length));
+  reposParaKpis.forEach(r => {
+    const efec = categoriasEfectivas(r, ocultarEstancado);
+    CATS.forEach(c => totales[c.key] += efec[c.key].length);
+  });
 
   document.getElementById("kpis").innerHTML = CATS.map(c => `
     <div class="kpi ${c.cls}">
@@ -312,10 +348,71 @@ function render() {
       <div class="l">${c.label}</div>
     </div>`).join("");
 
+  const controlesDetalleSoloIds = ["filtro-repo", "buscar"];
+  controlesDetalleSoloIds.forEach(id => {
+    document.getElementById(id).style.display = vista === "detalle" ? "" : "none";
+  });
+
+  if (vista === "resumen") renderResumen(ocultarEstancado);
+  else renderDetalle(repoFiltro, ocultarEstancado);
+}
+
+function renderResumen(ocultarEstancado) {
+  const repos = DATA.repos || [];
+  if (!repos.length) {
+    document.getElementById("contenido").innerHTML = `<div class="state-msg">Sin repos para mostrar.</div>`;
+    return;
+  }
+
+  const totalesCol = {};
+  CATS.forEach(c => totalesCol[c.key] = 0);
+  let totalGeneral = 0;
+
+  const filas = repos.map(r => {
+    const efec = categoriasEfectivas(r, ocultarEstancado);
+    let totalRepo = 0;
+    const celdas = CATS.map(c => {
+      const n = efec[c.key].length;
+      totalesCol[c.key] += n;
+      totalRepo += n;
+      return `<td class="num-cell ${n === 0 ? 'zero' : ''}">${n}</td>`;
+    }).join("");
+    totalGeneral += totalRepo;
+    return `<tr>
+      <td class="repo-cell">${escapeHtml(r.nombre)}</td>
+      ${celdas}
+      <td class="num-cell">${totalRepo}</td>
+    </tr>`;
+  }).join("");
+
+  const filaTotal = `<tr class="total-row">
+    <td>Total</td>
+    ${CATS.map(c => `<td class="num-cell">${totalesCol[c.key]}</td>`).join("")}
+    <td class="num-cell">${totalGeneral}</td>
+  </tr>`;
+
+  document.getElementById("contenido").innerHTML = `
+    <div style="overflow-x:auto;">
+      <table class="resumen-table">
+        <thead><tr>
+          <th>Proyecto</th>
+          ${CATS.map(c => `<th>${c.label}</th>`).join("")}
+          <th>Total abiertos</th>
+        </tr></thead>
+        <tbody>${filas}${filaTotal}</tbody>
+      </table>
+    </div>`;
+}
+
+function renderDetalle(repoFiltro, ocultarEstancado) {
+  const busq = document.getElementById("buscar").value.trim().toLowerCase();
+  const repos = (DATA.repos || []).filter(r => !repoFiltro || r.nombre === repoFiltro);
+
   const html = repos.map(r => {
+    const efec = categoriasEfectivas(r, ocultarEstancado);
     const cols = CATS.map(c => {
       if (c.key === "estancado" && ocultarEstancado) return "";
-      let items = r.categorias[c.key] || [];
+      let items = efec[c.key];
       if (busq) items = items.filter(i =>
         String(i.numero).includes(busq) || (i.titulo||"").toLowerCase().includes(busq));
       const cardsHtml = items.length
@@ -329,7 +426,7 @@ function render() {
       ? `<details class="completado"><summary>Completado ayer (${completados.length})</summary>${completados.map(card).join("")}</details>`
       : "";
 
-    const totalAbiertos = Object.values(r.categorias).reduce((a,arr)=>a+arr.length,0);
+    const totalAbiertos = CATS.reduce((a, c) => a + efec[c.key].length, 0);
     return `<div class="repo-block">
       <div class="repo-title">${escapeHtml(r.nombre)} <span class="badge">${totalAbiertos} abiertos</span></div>
       <div class="board">${cols}</div>
@@ -362,9 +459,18 @@ function mostrarErrores(errores) {
   }
 }
 
+function cambiarVista(nueva) {
+  vista = nueva;
+  document.getElementById("tab-resumen").classList.toggle("active", vista === "resumen");
+  document.getElementById("tab-detalle").classList.toggle("active", vista === "detalle");
+  render();
+}
+
 function attachListeners() {
   if (listenersAttached) return;
   listenersAttached = true;
+  document.getElementById("tab-resumen").addEventListener("click", () => cambiarVista("resumen"));
+  document.getElementById("tab-detalle").addEventListener("click", () => cambiarVista("detalle"));
   document.getElementById("filtro-repo").addEventListener("change", render);
   document.getElementById("buscar").addEventListener("input", render);
   document.getElementById("ocultar-estancado").addEventListener("change", render);
