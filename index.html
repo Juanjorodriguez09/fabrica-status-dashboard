@@ -6,54 +6,51 @@
 <title>Estado de la fábrica</title>
 <style>
   :root {
-    --bg: #0b0d12;
-    --panel: #14171f;
-    --panel-2: #1a1e29;
-    --border: #262b38;
-    --border-soft: #1f2330;
+    --bg: #0a0c10;
+    --panel: #12151c;
+    --panel-2: #181c26;
+    --border: #232838;
+    --border-soft: #1b1f2b;
     --text: #eceef3;
-    --text-dim: #8b92a8;
-    --text-faint: #5c6377;
+    --text-dim: #8a91a8;
+    --text-faint: #565d72;
     --accent: #7c9bff;
-    --accent-soft: rgba(124,155,255,0.12);
+    --accent-soft: rgba(124,155,255,0.1);
     --red: #ff7a7a;
-    --red-soft: rgba(255,122,122,0.1);
+    --red-soft: rgba(255,122,122,0.09);
     --amber: #ffbf6b;
-    --amber-soft: rgba(255,191,107,0.1);
-    --teal: #4fd6b5;
-    --teal-soft: rgba(79,214,181,0.1);
+    --amber-soft: rgba(255,191,107,0.09);
     --blue: #5ec3ff;
-    --blue-soft: rgba(94,195,255,0.1);
-    --gray: #7c8298;
-    --gray-soft: rgba(124,130,152,0.1);
+    --blue-soft: rgba(94,195,255,0.09);
+    --gray: #767c92;
+    --gray-soft: rgba(118,124,146,0.09);
     --green: #58d68d;
-    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.24);
+    --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 10px 28px rgba(0,0,0,0.28);
     --radius: 12px;
+    --radius-sm: 8px;
   }
   @media (prefers-color-scheme: light) {
     :root {
-      --bg: #f6f7fb;
+      --bg: #f5f6fa;
       --panel: #ffffff;
       --panel-2: #f7f8fc;
-      --border: #e3e6ef;
-      --border-soft: #ececf3;
+      --border: #e4e7f0;
+      --border-soft: #edeff5;
       --text: #171a24;
-      --text-dim: #62697e;
+      --text-dim: #5d6478;
       --text-faint: #99a0b4;
       --accent: #4361ee;
-      --accent-soft: rgba(67,97,238,0.08);
+      --accent-soft: rgba(67,97,238,0.07);
       --red: #d64545;
-      --red-soft: rgba(214,69,69,0.08);
+      --red-soft: rgba(214,69,69,0.07);
       --amber: #b3690f;
-      --amber-soft: rgba(179,105,15,0.08);
-      --teal: #0f8f76;
-      --teal-soft: rgba(15,143,118,0.08);
+      --amber-soft: rgba(179,105,15,0.07);
       --blue: #1878b0;
-      --blue-soft: rgba(24,120,176,0.08);
+      --blue-soft: rgba(24,120,176,0.07);
       --gray: #666c80;
-      --gray-soft: rgba(102,108,128,0.08);
+      --gray-soft: rgba(102,108,128,0.07);
       --green: #17915a;
-      --shadow: 0 1px 2px rgba(20,25,40,0.04), 0 8px 24px rgba(20,25,40,0.06);
+      --shadow: 0 1px 2px rgba(20,25,40,0.04), 0 8px 24px rgba(20,25,40,0.05);
     }
   }
   * { box-sizing: border-box; }
@@ -65,19 +62,22 @@
     -webkit-font-smoothing: antialiased;
     line-height: 1.45;
   }
+  svg.ic { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -3px; flex-shrink: 0; }
+
   .wrap { max-width: 1320px; margin: 0 auto; padding: 32px 24px 100px; }
 
   header {
     display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between;
-    gap: 16px; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--border-soft);
+    gap: 16px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border-soft);
   }
-  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand { display: flex; align-items: center; gap: 13px; }
   .brand .mark {
-    width: 38px; height: 38px; border-radius: 10px; background: var(--accent-soft);
-    display: flex; align-items: center; justify-content: center; font-size: 1.15rem; flex-shrink: 0;
+    width: 38px; height: 38px; border-radius: 10px; background: var(--accent-soft); color: var(--accent);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
-  h1 { font-size: 1.3rem; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
-  .subtitle { font-size: 0.82rem; color: var(--text-dim); margin-top: 2px; }
+  .brand .mark svg { width: 20px; height: 20px; }
+  h1 { font-size: 1.28rem; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
+  .subtitle { font-size: 0.81rem; color: var(--text-dim); margin-top: 2px; }
   .freshness {
     display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-dim);
     background: var(--panel); border: 1px solid var(--border); border-radius: 999px;
@@ -87,21 +87,31 @@
   .freshness.stale .dot { background: var(--amber); }
   .freshness.old .dot { background: var(--red); }
 
-  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 28px; }
+  .hist-banner {
+    display: none; align-items: center; justify-content: space-between; gap: 12px;
+    background: var(--accent-soft); border: 1px solid var(--accent); color: var(--accent);
+    border-radius: var(--radius); padding: 10px 16px; margin-bottom: 20px; font-size: 0.84rem;
+  }
+  .hist-banner.show { display: flex; }
+  .hist-banner button {
+    background: transparent; border: 1px solid var(--accent); color: var(--accent);
+    border-radius: 7px; padding: 5px 12px; font-size: 0.78rem; cursor: pointer; font-family: inherit;
+  }
+
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 26px; }
   .kpi {
     background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
     padding: 16px 18px; box-shadow: var(--shadow);
   }
   .kpi .top { display: flex; align-items: center; justify-content: space-between; }
-  .kpi .n { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em; }
-  .kpi .ic { font-size: 1.1rem; opacity: 0.85; }
-  .kpi .l { font-size: 0.78rem; color: var(--text-dim); margin-top: 4px; }
-  .kpi.pausado .n { color: var(--red); }
-  .kpi.pr .n { color: var(--blue); }
-  .kpi.aprobar .n { color: var(--amber); }
-  .kpi.nuevo .n { color: var(--accent); }
-  .kpi.cierre .n { color: var(--teal); }
-  .kpi.estancado .n { color: var(--gray); }
+  .kpi .n { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.02em; }
+  .kpi .ic-wrap { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+  .kpi .l { font-size: 0.77rem; color: var(--text-dim); margin-top: 4px; }
+  .kpi.pausado .n { color: var(--red); } .kpi.pausado .ic-wrap { background: var(--red-soft); color: var(--red); }
+  .kpi.pr .n { color: var(--blue); } .kpi.pr .ic-wrap { background: var(--blue-soft); color: var(--blue); }
+  .kpi.aprobar .n { color: var(--amber); } .kpi.aprobar .ic-wrap { background: var(--amber-soft); color: var(--amber); }
+  .kpi.nuevo .n { color: var(--accent); } .kpi.nuevo .ic-wrap { background: var(--accent-soft); color: var(--accent); }
+  .kpi.estancado .n { color: var(--gray); } .kpi.estancado .ic-wrap { background: var(--gray-soft); color: var(--gray); }
 
   .controls {
     display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; align-items: center;
@@ -110,24 +120,27 @@
   }
   select, input[type="search"] {
     background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
-    border-radius: 8px; padding: 8px 12px; font-size: 0.85rem; font-family: inherit;
+    border-radius: var(--radius-sm); padding: 8px 12px; font-size: 0.85rem; font-family: inherit;
   }
   select:focus, input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
   input[type="search"] { min-width: 240px; flex: 1; }
+  .field { display: flex; align-items: center; gap: 6px; }
+  .field .flabel { font-size: 0.76rem; color: var(--text-faint); white-space: nowrap; }
   .toggle { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: var(--text-dim); cursor: pointer; user-select: none; white-space: nowrap; }
   .toggle input { accent-color: var(--accent); }
+  .spacer { flex: 1 1 auto; }
 
   .errors {
     background: var(--red-soft); border: 1px solid var(--red); color: var(--red);
     border-radius: var(--radius); padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem;
   }
-  .errors strong { display: block; margin-bottom: 4px; }
+  .errors strong { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
   .errors ul { margin: 4px 0 0; padding-left: 18px; }
 
-  .repo-block { margin-bottom: 36px; }
-  .repo-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .repo-block { margin-bottom: 34px; }
+  .repo-title { font-size: 1.02rem; font-weight: 700; margin-bottom: 13px; display: flex; align-items: center; gap: 10px; }
   .repo-title .badge {
-    font-size: 0.72rem; font-weight: 600; color: var(--text-dim); background: var(--panel-2);
+    font-size: 0.71rem; font-weight: 600; color: var(--text-dim); background: var(--panel-2);
     border: 1px solid var(--border); border-radius: 999px; padding: 3px 11px;
   }
 
@@ -137,15 +150,15 @@
     padding: 12px; min-height: 72px; box-shadow: var(--shadow);
   }
   .col h3 {
-    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700;
-    color: var(--text-dim); margin: 2px 4px 12px; display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.69rem; text-transform: uppercase; letter-spacing: 0.045em; font-weight: 700;
+    color: var(--text-dim); margin: 2px 4px 12px; display: flex; align-items: center; gap: 6px; justify-content: space-between;
   }
-  .col h3 span { background: var(--panel-2); border-radius: 999px; padding: 1px 8px; font-size: 0.68rem; }
+  .col h3 .lbl { display: flex; align-items: center; gap: 6px; }
+  .col h3 .cnt { background: var(--panel-2); border-radius: 999px; padding: 1px 8px; font-size: 0.68rem; }
   .col.pausado { border-top: 3px solid var(--red); }
   .col.pr { border-top: 3px solid var(--blue); }
   .col.aprobar { border-top: 3px solid var(--amber); }
   .col.nuevo { border-top: 3px solid var(--accent); }
-  .col.cierre { border-top: 3px solid var(--teal); }
   .col.estancado { border-top: 3px solid var(--gray); }
 
   .card {
@@ -154,6 +167,11 @@
     transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
   }
   .card:hover { border-color: var(--accent); transform: translateY(-1px); box-shadow: var(--shadow); }
+  .card .top-row { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+  .card .tag {
+    font-size: 0.63rem; font-weight: 700; letter-spacing: 0.03em; padding: 1px 6px; border-radius: 4px;
+    background: var(--panel); border: 1px solid var(--border); color: var(--text-faint);
+  }
   .card .num { font-size: 0.72rem; color: var(--text-faint); font-variant-numeric: tabular-nums; }
   .card .title { font-size: 0.85rem; font-weight: 650; margin: 3px 0 5px; line-height: 1.32; }
   .card .motivo { font-size: 0.77rem; color: var(--text-dim); line-height: 1.4; }
@@ -163,11 +181,9 @@
   details.completado { margin-top: 12px; }
   details.completado summary {
     cursor: pointer; font-size: 0.82rem; color: var(--text-dim); font-weight: 600;
-    padding: 4px 0; list-style: none;
+    padding: 4px 0; list-style: none; display: flex; align-items: center; gap: 6px;
   }
   details.completado summary::-webkit-details-marker { display: none; }
-  details.completado summary::before { content: "▸ "; }
-  details.completado[open] summary::before { content: "▾ "; }
   details.completado .card { margin-top: 8px; }
 
   .state-msg { color: var(--text-dim); padding: 60px 0; text-align: center; font-size: 0.9rem; }
@@ -181,7 +197,9 @@
 <div class="wrap">
   <header>
     <div class="brand">
-      <div class="mark">📋</div>
+      <div class="mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="6" height="16" rx="1.5"/><rect x="11" y="4" width="6" height="10" rx="1.5"/><rect x="19" y="4" width="2" height="6" rx="1"/></svg>
+      </div>
       <div>
         <h1>Estado de la fábrica de software</h1>
         <div class="subtitle">Panorama diario de todos los repos — generado automáticamente</div>
@@ -192,6 +210,11 @@
     </div>
   </header>
 
+  <div class="hist-banner" id="hist-banner">
+    <span id="hist-banner-text"></span>
+    <button id="hist-volver">Volver a hoy</button>
+  </div>
+
   <div id="errors-box"></div>
 
   <div class="kpis" id="kpis"></div>
@@ -200,6 +223,11 @@
     <select id="filtro-repo"><option value="">Todos los repos</option></select>
     <input type="search" id="buscar" placeholder="Buscar por título o número…">
     <label class="toggle"><input type="checkbox" id="ocultar-estancado"> Ocultar estancados</label>
+    <div class="spacer"></div>
+    <div class="field">
+      <span class="flabel">Ver fecha:</span>
+      <select id="historial-fecha"><option value="">Hoy (en vivo)</option></select>
+    </div>
   </div>
 
   <div id="contenido"><div class="state-msg">Cargando data/estado.json…</div></div>
@@ -208,16 +236,29 @@
 </div>
 
 <script>
+const OWNER = "Juanjorodriguez09";
+const REPO = "fabrica-status-dashboard";
+
+const ICONS = {
+  pausado: '<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="10" y1="9" x2="10" y2="15"/><line x1="14" y1="9" x2="14" y2="15"/></svg>',
+  pr: '<svg class="ic" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M6 8.5V15.5"/><path d="M18 8.5V13a3 3 0 0 1-3 3H8.5"/></svg>',
+  aprobar: '<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>',
+  nuevo: '<svg class="ic" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><polyline points="14 3 14 8 19 8"/><line x1="12" y1="12" x2="12" y2="17"/><line x1="9.5" y1="14.5" x2="14.5" y2="14.5"/></svg>',
+  estancado: '<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="8" y1="12" x2="16" y2="12"/></svg>',
+  calendar: '<svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16" rx="2"/><line x1="3" y1="9.5" x2="21" y2="9.5"/><line x1="8" y1="2.5" x2="8" y2="6.5"/><line x1="16" y1="2.5" x2="16" y2="6.5"/></svg>',
+  warn: '<svg class="ic" viewBox="0 0 24 24"><path d="M12 3.5 2 20.5h20L12 3.5Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><line x1="12" y1="17" x2="12" y2="17"/></svg>',
+};
+
 const CATS = [
-  { key: "pausado_esperando_decision", label: "Pausado — esperando decisión", cls: "pausado", icon: "⏸️" },
-  { key: "pr_esperando_revision_merge", label: "PR — revisión o merge", cls: "pr", icon: "🔀" },
-  { key: "pendiente_de_aprobar", label: "Pendiente de aprobar", cls: "aprobar", icon: "🕓" },
-  { key: "recien_abierto_sin_plan", label: "Recién abierto, sin plan", cls: "nuevo", icon: "🆕" },
-  { key: "cierre_administrativo_pendiente", label: "Falta cerrar (ya mergeado)", cls: "cierre", icon: "✅" },
-  { key: "estancado", label: "Estancado", cls: "estancado", icon: "🕸️" },
+  { key: "pausado_esperando_decision", label: "Pausado — esperando decisión", cls: "pausado" },
+  { key: "pr_esperando_revision_merge", label: "PR — revisión o merge", cls: "pr" },
+  { key: "pendiente_de_aprobar", label: "Pendiente de aprobar", cls: "aprobar" },
+  { key: "recien_abierto_sin_plan", label: "Recién abierto, sin plan", cls: "nuevo" },
+  { key: "estancado", label: "Estancado", cls: "estancado" },
 ];
 
 let DATA = null;
+let listenersAttached = false;
 
 function fmtFecha(iso) {
   if (!iso) return "";
@@ -239,11 +280,11 @@ function actualizarFrescura(iso) {
 }
 
 function card(item) {
-  const icon = item.tipo === "pr" ? "🔀" : "📝";
+  const tag = item.tipo === "pr" ? "PR" : "ISSUE";
   const motivo = item.motivo ? `<div class="motivo">${escapeHtml(item.motivo)}</div>` : "";
   const fecha = item.ultima_actividad ? `<div class="fecha">Última actividad: ${escapeHtml(item.ultima_actividad)}</div>` : "";
   return `<a class="card" href="${item.url || '#'}" target="_blank" rel="noopener">
-    <div class="num">${icon} #${item.numero ?? "?"}</div>
+    <div class="top-row"><span class="tag">${tag}</span><span class="num">#${item.numero ?? "?"}</span></div>
     <div class="title">${escapeHtml(item.titulo || "(sin título)")}</div>
     ${motivo}${fecha}
   </a>`;
@@ -259,7 +300,7 @@ function render() {
   const busq = document.getElementById("buscar").value.trim().toLowerCase();
   const ocultarEstancado = document.getElementById("ocultar-estancado").checked;
 
-  const repos = DATA.repos.filter(r => !repoFiltro || r.nombre === repoFiltro);
+  const repos = (DATA.repos || []).filter(r => !repoFiltro || r.nombre === repoFiltro);
 
   const totales = {};
   CATS.forEach(c => totales[c.key] = 0);
@@ -267,7 +308,7 @@ function render() {
 
   document.getElementById("kpis").innerHTML = CATS.map(c => `
     <div class="kpi ${c.cls}">
-      <div class="top"><div class="n">${totales[c.key]}</div><div class="ic">${c.icon}</div></div>
+      <div class="top"><div class="n">${totales[c.key]}</div><div class="ic-wrap">${ICONS[c.cls]}</div></div>
       <div class="l">${c.label}</div>
     </div>`).join("");
 
@@ -280,7 +321,7 @@ function render() {
       const cardsHtml = items.length
         ? items.map(card).join("")
         : `<div class="empty-col">ninguno</div>`;
-      return `<div class="col ${c.cls}"><h3>${c.label}<span>${items.length}</span></h3>${cardsHtml}</div>`;
+      return `<div class="col ${c.cls}"><h3><span class="lbl">${ICONS[c.cls]}${c.label}</span><span class="cnt">${items.length}</span></h3>${cardsHtml}</div>`;
     }).join("");
 
     const completados = r.completado_ayer || [];
@@ -301,15 +342,54 @@ function render() {
 
 function poblarFiltroRepo() {
   const sel = document.getElementById("filtro-repo");
-  DATA.repos.forEach(r => {
+  const actual = sel.value;
+  sel.innerHTML = '<option value="">Todos los repos</option>';
+  (DATA.repos || []).forEach(r => {
     const opt = document.createElement("option");
     opt.value = r.nombre;
     opt.textContent = r.nombre;
     sel.appendChild(opt);
   });
+  if ([...sel.options].some(o => o.value === actual)) sel.value = actual;
 }
 
-async function cargar() {
+function mostrarErrores(errores) {
+  const box = document.getElementById("errors-box");
+  if (errores && errores.length) {
+    box.innerHTML = `<div class="errors"><strong>${ICONS.warn}Errores en la última corrida</strong><ul>${errores.map(e => `<li>${escapeHtml(e)}</li>`).join("")}</ul></div>`;
+  } else {
+    box.innerHTML = "";
+  }
+}
+
+function attachListeners() {
+  if (listenersAttached) return;
+  listenersAttached = true;
+  document.getElementById("filtro-repo").addEventListener("change", render);
+  document.getElementById("buscar").addEventListener("input", render);
+  document.getElementById("ocultar-estancado").addEventListener("change", render);
+  document.getElementById("historial-fecha").addEventListener("change", (e) => {
+    const sha = e.target.value;
+    if (!sha) { cargarEnVivo(); ocultarBannerHistorico(); }
+    else verHistorico(sha);
+  });
+  document.getElementById("hist-volver").addEventListener("click", () => {
+    document.getElementById("historial-fecha").value = "";
+    cargarEnVivo();
+    ocultarBannerHistorico();
+  });
+}
+
+function mostrarBannerHistorico(iso) {
+  document.getElementById("hist-banner-text").textContent =
+    "Viendo el estado histórico del " + fmtFecha(iso) + " — no es el estado actual.";
+  document.getElementById("hist-banner").classList.add("show");
+}
+function ocultarBannerHistorico() {
+  document.getElementById("hist-banner").classList.remove("show");
+}
+
+async function cargarEnVivo() {
   try {
     const res = await fetch("data/estado.json", { cache: "no-store" });
     if (!res.ok) throw new Error("HTTP " + res.status);
@@ -320,24 +400,54 @@ async function cargar() {
     document.getElementById("meta").textContent = "sin datos";
     return;
   }
-
   actualizarFrescura(DATA.generado_en);
-
-  const errores = DATA.errores || [];
-  if (errores.length) {
-    document.getElementById("errors-box").innerHTML =
-      `<div class="errors"><strong>⚠️ Errores en la última corrida</strong><ul>${errores.map(e => `<li>${escapeHtml(e)}</li>`).join("")}</ul></div>`;
-  }
-
+  mostrarErrores(DATA.errores);
   poblarFiltroRepo();
   render();
-
-  document.getElementById("filtro-repo").addEventListener("change", render);
-  document.getElementById("buscar").addEventListener("input", render);
-  document.getElementById("ocultar-estancado").addEventListener("change", render);
 }
 
-cargar();
+async function verHistorico(sha) {
+  try {
+    const res = await fetch(`https://raw.githubusercontent.com/${OWNER}/${REPO}/${sha}/data/estado.json`, { cache: "no-store" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    DATA = await res.json();
+    actualizarFrescura(DATA.generado_en);
+    mostrarErrores(DATA.errores);
+    poblarFiltroRepo();
+    render();
+    mostrarBannerHistorico(DATA.generado_en);
+  } catch (e) {
+    alert("No se pudo cargar ese historial: " + e.message);
+  }
+}
+
+async function cargarHistorialDisponible() {
+  const sel = document.getElementById("historial-fecha");
+  try {
+    const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/commits?path=data/estado.json&per_page=30`);
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const commits = await res.json();
+    commits.forEach((c, i) => {
+      if (i === 0) return; // el primero suele ser el estado actual, ya cubierto por "Hoy"
+      const fecha = new Date(c.commit.author.date);
+      const opt = document.createElement("option");
+      opt.value = c.sha;
+      opt.textContent = fecha.toLocaleDateString("es-CO", { day: "2-digit", month: "short", year: "numeric" });
+      sel.appendChild(opt);
+    });
+  } catch (e) {
+    sel.disabled = true;
+    sel.innerHTML = '<option value="">Historial no disponible</option>';
+  }
+}
+
+async function iniciar() {
+  attachListeners();
+  await cargarEnVivo();
+  cargarHistorialDisponible();
+}
+
+iniciar();
 </script>
 </body>
 </html>
