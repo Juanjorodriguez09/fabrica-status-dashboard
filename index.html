@@ -134,7 +134,8 @@
   .resumen-table tr:last-child td { border-bottom: none; }
   .resumen-table tr.total-row td { font-weight: 800; background: var(--panel-2); border-top: 2px solid var(--border); }
   .resumen-table td.repo-cell { font-weight: 650; }
-  .resumen-table td.repo-cell a { color: inherit; text-decoration: none; }
+  .resumen-table td.repo-cell a { color: inherit; text-decoration: none; cursor: pointer; }
+  .resumen-table td.repo-cell a:hover { color: var(--accent); text-decoration: underline; }
   .resumen-table .zero { color: var(--text-faint); font-weight: 500; }
   select, input[type="search"] {
     background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
@@ -252,11 +253,6 @@
     </div>
   </div>
 
-  <div class="controls" id="controles-categorias">
-    <span class="flabel">Mostrar:</span>
-    <span id="toggles-categorias"></span>
-  </div>
-
   <div id="contenido"><div class="state-msg">Cargando data/estado.json…</div></div>
 
   <footer>Generado por la Routine <strong>reporte-diario-fabrica</strong> · datos vía GitHub API, snapshot diario</footer>
@@ -287,7 +283,6 @@ const CATS = [
 let DATA = null;
 let listenersAttached = false;
 let vista = "resumen";
-const categoriasOcultas = new Set(); // vacío = se muestran todas
 
 function fmtFecha(iso) {
   if (!iso) return "";
@@ -323,14 +318,10 @@ function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 }
 
-// Devuelve, por repo, las categorías ya filtradas por los toggles "Mostrar" —
-// un solo lugar que decide esto, para que KPIs, badges, tabla y columnas
-// nunca queden desincronizados entre sí.
+// Normaliza las categorías de un repo (por si falta alguna clave en el JSON).
 function categoriasEfectivas(repo) {
   const out = {};
-  CATS.forEach(c => {
-    out[c.key] = categoriasOcultas.has(c.key) ? [] : (repo.categorias[c.key] || []);
-  });
+  CATS.forEach(c => { out[c.key] = repo.categorias[c.key] || []; });
   return out;
 }
 
@@ -383,7 +374,7 @@ function renderResumen() {
     }).join("");
     totalGeneral += totalRepo;
     return `<tr>
-      <td class="repo-cell">${escapeHtml(r.nombre)}</td>
+      <td class="repo-cell"><a href="#" class="repo-link" data-repo="${escapeHtml(r.nombre)}">${escapeHtml(r.nombre)}</a></td>
       ${celdas}
       <td class="num-cell">${totalRepo}</td>
     </tr>`;
@@ -415,7 +406,6 @@ function renderDetalle(repoFiltro) {
   const html = repos.map(r => {
     const efec = categoriasEfectivas(r);
     const cols = CATS.map(c => {
-      if (categoriasOcultas.has(c.key)) return "";
       let items = efec[c.key];
       if (busq) items = items.filter(i =>
         String(i.numero).includes(busq) || (i.titulo||"").toLowerCase().includes(busq));
@@ -463,22 +453,6 @@ function mostrarErrores(errores) {
   }
 }
 
-function generarTogglesCategorias() {
-  const cont = document.getElementById("toggles-categorias");
-  cont.innerHTML = CATS.map(c => `
-    <label class="toggle" style="margin-right:14px;">
-      <input type="checkbox" data-cat="${c.key}" checked> ${c.label}
-    </label>`).join("");
-  cont.querySelectorAll("input[type=checkbox]").forEach(cb => {
-    cb.addEventListener("change", () => {
-      const key = cb.getAttribute("data-cat");
-      if (cb.checked) categoriasOcultas.delete(key);
-      else categoriasOcultas.add(key);
-      render();
-    });
-  });
-}
-
 function cambiarVista(nueva) {
   vista = nueva;
   document.getElementById("tab-resumen").classList.toggle("active", vista === "resumen");
@@ -493,6 +467,13 @@ function attachListeners() {
   document.getElementById("tab-detalle").addEventListener("click", () => cambiarVista("detalle"));
   document.getElementById("filtro-repo").addEventListener("change", render);
   document.getElementById("buscar").addEventListener("input", render);
+  document.getElementById("contenido").addEventListener("click", (e) => {
+    const link = e.target.closest(".repo-link");
+    if (!link) return;
+    e.preventDefault();
+    document.getElementById("filtro-repo").value = link.getAttribute("data-repo");
+    cambiarVista("detalle");
+  });
   document.getElementById("historial-fecha").addEventListener("change", (e) => {
     const sha = e.target.value;
     if (!sha) { cargarEnVivo(); ocultarBannerHistorico(); }
@@ -567,7 +548,6 @@ async function cargarHistorialDisponible() {
 }
 
 async function iniciar() {
-  generarTogglesCategorias();
   attachListeners();
   await cargarEnVivo();
   cargarHistorialDisponible();
