@@ -25,6 +25,7 @@
     --gray: #767c92;
     --gray-soft: rgba(118,124,146,0.09);
     --green: #58d68d;
+    --green-soft: rgba(88,214,141,0.1);
     --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 10px 28px rgba(0,0,0,0.28);
     --radius: 12px;
     --radius-sm: 8px;
@@ -50,6 +51,7 @@
       --gray: #666c80;
       --gray-soft: rgba(102,108,128,0.07);
       --green: #17915a;
+      --green-soft: rgba(23,145,90,0.08);
       --shadow: 0 1px 2px rgba(20,25,40,0.04), 0 8px 24px rgba(20,25,40,0.05);
     }
   }
@@ -190,7 +192,10 @@
   .card .tag {
     font-size: 0.63rem; font-weight: 700; letter-spacing: 0.03em; padding: 1px 6px; border-radius: 4px;
     background: var(--panel); border: 1px solid var(--border); color: var(--text-faint);
+    text-transform: uppercase;
   }
+  .card .tag.esfuerzo-chico { background: var(--green-soft); color: var(--green); border-color: var(--green); }
+  .card .tag.esfuerzo-grande { background: var(--amber-soft); color: var(--amber); border-color: var(--amber); }
   .card .num { font-size: 0.72rem; color: var(--text-faint); font-variant-numeric: tabular-nums; }
   .card .title { font-size: 0.85rem; font-weight: 650; margin: 3px 0 5px; line-height: 1.32; }
   .card .motivo { font-size: 0.77rem; color: var(--text-dim); line-height: 1.4; }
@@ -305,10 +310,13 @@ function actualizarFrescura(iso) {
 
 function card(item) {
   const tag = item.tipo === "pr" ? "PR" : "ISSUE";
+  const esfuerzo = item.esfuerzo === "chico" || item.esfuerzo === "grande"
+    ? `<span class="tag esfuerzo-${item.esfuerzo}">${item.esfuerzo}</span>`
+    : "";
   const motivo = item.motivo ? `<div class="motivo">${escapeHtml(item.motivo)}</div>` : "";
   const fecha = item.ultima_actividad ? `<div class="fecha">Última actividad: ${escapeHtml(item.ultima_actividad)}</div>` : "";
   return `<a class="card" href="${item.url || '#'}" target="_blank" rel="noopener">
-    <div class="top-row"><span class="tag">${tag}</span><span class="num">#${item.numero ?? "?"}</span></div>
+    <div class="top-row"><span class="tag">${tag}</span><span class="num">#${item.numero ?? "?"}</span>${esfuerzo}</div>
     <div class="title">${escapeHtml(item.titulo || "(sin título)")}</div>
     ${motivo}${fecha}
   </a>`;
