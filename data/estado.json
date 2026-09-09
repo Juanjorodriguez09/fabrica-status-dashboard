@@ -1,5 +1,5 @@
 {
-  "generado_en": "2026-09-08T12:56:33+00:00",
+  "generado_en": "2026-09-09T07:55:59-05:00",
   "repos": [
     {
       "nombre": "Bi_fabrica",
@@ -16,54 +16,12 @@
       "nombre": "WebChat_Fabrica",
       "categorias": {
         "pausado_esperando_decision": [
-          {
-            "numero": 14,
-            "tipo": "issue",
-            "titulo": "prueba de funcionamiento del flujo de n8n con Telegram",
-            "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/14",
-            "motivo": "El planificador concluyó que no hay tarea de desarrollo aplicable a este repo (n8n/Telegram no corresponde a webmicomercio) y dejó preguntas abiertas; sin respuesta.",
-            "ultima_actividad": "2026-08-26"
-          },
-          {
-            "numero": 13,
-            "tipo": "issue",
-            "titulo": "Prueba de Telegram para mirar el flujo no va a hacer nada",
-            "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/13",
-            "motivo": "El planificador no generó plan y preguntó si corresponde cerrar el Issue; sin respuesta.",
-            "ultima_actividad": "2026-08-26"
-          },
-          {
-            "numero": 12,
-            "tipo": "issue",
-            "titulo": "Esto sólo es una prueba desde N8N para probar las peticiones",
-            "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/12",
-            "motivo": "Prueba de conectividad de N8N; el planificador preguntó si corresponde cerrarlo; sin respuesta.",
-            "ultima_actividad": "2026-08-26"
-          },
-          {
-            "numero": 11,
-            "tipo": "issue",
-            "titulo": "Nuevo",
-            "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/11",
-            "motivo": "Issue sin contenido suficiente (\"Nuevo\"); el planificador dejó varias preguntas de clarificación sin respuesta.",
-            "ultima_actividad": "2026-08-26"
-          },
-          {
-            "numero": 10,
-            "tipo": "issue",
-            "titulo": "Esto es una prueba del voz de Telegram, no implementar nada real",
-            "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/10",
-            "motivo": "Prueba del canal de voz de Telegram; el planificador recomendó cerrar sin desarrollo; sin respuesta.",
-            "ultima_actividad": "2026-08-26"
-          },
-          {
-            "numero": 9,
-            "tipo": "issue",
-            "titulo": "Cambio desde n8n",
-            "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/9",
-            "motivo": "Prueba del formulario de n8n; el planificador preguntó si corresponde cerrarlo; sin respuesta.",
-            "ultima_actividad": "2026-08-25"
-          }
+          {"numero": 9, "tipo": "issue", "titulo": "[Solicitud]: Cambio desde n8n", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/9", "motivo": "El planificador concluyó que es una prueba del formulario de n8n, sin solicitud de cambio real, y dejó abierta la pregunta de si corresponde cerrarlo; nadie respondió.", "ultima_actividad": "2026-08-25"},
+          {"numero": 10, "tipo": "issue", "titulo": "[Solicitud]: Esto es una prueba del voz de Telegram, no implementar na...", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/10", "motivo": "El planificador identificó que es una prueba del canal voz→Telegram→Issue y preguntó si había una solicitud real detrás; nadie respondió.", "ultima_actividad": "2026-08-26"},
+          {"numero": 11, "tipo": "issue", "titulo": "[Solicitud]: Nuevo", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/11", "motivo": "El planificador no pudo derivar ningún objetivo del contenido (\"Nuevo\") y dejó una lista de preguntas para que un humano complete el Issue; nadie respondió.", "ultima_actividad": "2026-08-26"},
+          {"numero": 12, "tipo": "issue", "titulo": "[Solicitud]: Esto sólo es una prueba desde N8N para probar las peticiones", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/12", "motivo": "El planificador identificó una prueba de conectividad de N8N y preguntó si correspondía cerrar el Issue sin desarrollo; nadie respondió.", "ultima_actividad": "2026-08-26"},
+          {"numero": 13, "tipo": "issue", "titulo": "[Solicitud]: Prueba de Telegram para mirar el flujo no va a hacer nada", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/13", "motivo": "El planificador concluyó que es una prueba del canal Telegram→Issue y preguntó si debía cerrarse como tal; nadie respondió.", "ultima_actividad": "2026-08-26"},
+          {"numero": 14, "tipo": "issue", "titulo": "[Solicitud]: prueba de funcionamiento del flujo de n8n con Telegram", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/14", "motivo": "El planificador señaló que el pedido no aplica a este repo (sin backend/n8n/Telegram) y preguntó si debía cerrarse o reabrirse en el repo correcto; nadie respondió.", "ultima_actividad": "2026-08-26"}
         ],
         "pr_esperando_revision_merge": [],
         "pendiente_de_aprobar": [],
