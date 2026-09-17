@@ -114,6 +114,7 @@
   .kpi.aprobar .n { color: var(--amber); } .kpi.aprobar .ic-wrap { background: var(--amber-soft); color: var(--amber); }
   .kpi.nuevo .n { color: var(--accent); } .kpi.nuevo .ic-wrap { background: var(--accent-soft); color: var(--accent); }
   .kpi.estancado .n { color: var(--gray); } .kpi.estancado .ic-wrap { background: var(--gray-soft); color: var(--gray); }
+  .kpi.coordinador .n { color: var(--green); } .kpi.coordinador .ic-wrap { background: var(--green-soft); color: var(--green); }
 
   .tabs { display: flex; gap: 6px; margin-bottom: 18px; }
   .tab-btn {
@@ -196,6 +197,7 @@
   }
   .card .tag.esfuerzo-chico { background: var(--green-soft); color: var(--green); border-color: var(--green); }
   .card .tag.esfuerzo-grande { background: var(--amber-soft); color: var(--amber); border-color: var(--amber); }
+  .card .tag.coordinador { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
   .card .num { font-size: 0.72rem; color: var(--text-faint); font-variant-numeric: tabular-nums; }
   .card .title { font-size: 0.85rem; font-weight: 650; margin: 3px 0 5px; line-height: 1.32; }
   .card .motivo { font-size: 0.77rem; color: var(--text-dim); line-height: 1.4; }
@@ -275,6 +277,7 @@ const ICONS = {
   estancado: '<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="8" y1="12" x2="16" y2="12"/></svg>',
   calendar: '<svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16" rx="2"/><line x1="3" y1="9.5" x2="21" y2="9.5"/><line x1="8" y1="2.5" x2="8" y2="6.5"/><line x1="16" y1="2.5" x2="16" y2="6.5"/></svg>',
   warn: '<svg class="ic" viewBox="0 0 24 24"><path d="M12 3.5 2 20.5h20L12 3.5Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><line x1="12" y1="17" x2="12" y2="17"/></svg>',
+  coordinador: '<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polygon points="14.5 9.5 12.7 12.7 9.5 14.5 11.3 11.3 14.5 9.5"/></svg>',
 };
 
 const CATS = [
@@ -313,10 +316,13 @@ function card(item) {
   const esfuerzo = item.esfuerzo === "chico" || item.esfuerzo === "grande"
     ? `<span class="tag esfuerzo-${item.esfuerzo}">${item.esfuerzo}</span>`
     : "";
+  const coordinador = item.decidido_por_coordinador
+    ? `<span class="tag coordinador">🧭 Coordinador</span>`
+    : "";
   const motivo = item.motivo ? `<div class="motivo">${escapeHtml(item.motivo)}</div>` : "";
   const fecha = item.ultima_actividad ? `<div class="fecha">Última actividad: ${escapeHtml(item.ultima_actividad)}</div>` : "";
   return `<a class="card" href="${item.url || '#'}" target="_blank" rel="noopener">
-    <div class="top-row"><span class="tag">${tag}</span><span class="num">#${item.numero ?? "?"}</span>${esfuerzo}</div>
+    <div class="top-row"><span class="tag">${tag}</span><span class="num">#${item.numero ?? "?"}</span>${esfuerzo}${coordinador}</div>
     <div class="title">${escapeHtml(item.titulo || "(sin título)")}</div>
     ${motivo}${fecha}
   </a>`;
@@ -340,16 +346,24 @@ function render() {
   const reposParaKpis = (DATA.repos || []); // los KPIs siempre son de TODOS los repos, no del filtro de repo
   const totales = {};
   CATS.forEach(c => totales[c.key] = 0);
+  let decididoPorCoordinador = 0;
   reposParaKpis.forEach(r => {
     const efec = categoriasEfectivas(r);
     CATS.forEach(c => totales[c.key] += efec[c.key].length);
+    const todosLosItems = CATS.flatMap(c => efec[c.key]).concat(r.completado_ayer || []);
+    decididoPorCoordinador += todosLosItems.filter(i => i.decidido_por_coordinador).length;
   });
 
-  document.getElementById("kpis").innerHTML = CATS.map(c => `
+  const kpisHtml = CATS.map(c => `
     <div class="kpi ${c.cls}">
       <div class="top"><div class="n">${totales[c.key]}</div><div class="ic-wrap">${ICONS[c.cls]}</div></div>
       <div class="l">${c.label}</div>
-    </div>`).join("");
+    </div>`).join("") + `
+    <div class="kpi coordinador">
+      <div class="top"><div class="n">${decididoPorCoordinador}</div><div class="ic-wrap">${ICONS.coordinador}</div></div>
+      <div class="l">Decidido por el Coordinador</div>
+    </div>`;
+  document.getElementById("kpis").innerHTML = kpisHtml;
 
   const controlesDetalleSoloIds = ["filtro-repo", "buscar"];
   controlesDetalleSoloIds.forEach(id => {
