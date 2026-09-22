@@ -189,7 +189,7 @@
     transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
   }
   .card:hover { border-color: var(--accent); transform: translateY(-1px); box-shadow: var(--shadow); }
-  .card .top-row { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+  .card .top-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; row-gap: 4px; margin-bottom: 4px; }
   .card .tag {
     font-size: 0.63rem; font-weight: 700; letter-spacing: 0.03em; padding: 1px 6px; border-radius: 4px;
     background: var(--panel); border: 1px solid var(--border); color: var(--text-faint);
