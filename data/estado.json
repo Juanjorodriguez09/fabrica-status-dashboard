@@ -1,25 +1,25 @@
 {
-  "generado_en": "2026-09-21T07:58:40-05:00",
+  "generado_en": "2026-09-22T12:58:20+00:00",
   "repos": [
     {
       "nombre": "Bi_fabrica",
       "categorias": {
         "pausado_esperando_decision": [
-          {"numero": 36, "tipo": "issue", "titulo": "[Solicitud]: tooltip", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/36", "motivo": "Plan aprobado confirmó que es duplicado del Issue #19/PR #20; el agente recomienda cerrarlo como duplicado, decisión pendiente de un humano.", "ultima_actividad": "2026-09-14", "esfuerzo": "chico", "decidido_por_coordinador": true},
-          {"numero": 26, "tipo": "issue", "titulo": "[Consulta]: endpoints", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/26", "motivo": "Plan completo generado (no hay rate limiting), pero el agente aclara que es una consulta y pide confirmación humana antes de convertirla en desarrollo.", "ultima_actividad": "2026-09-10"}
+          {"numero": 26, "tipo": "issue", "titulo": "[Consulta]: endpoints", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/26", "motivo": "Plan generado pide confirmación humana sobre si convertir la consulta de rate limiting en solicitud de cambio y sobre su alcance; nadie respondió", "ultima_actividad": "2026-09-10"}
         ],
         "pr_esperando_revision_merge": [
-          {"numero": 38, "tipo": "pr", "titulo": "Agregar % de variación vs. período anterior al resumen (Issue #37)", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/pull/38", "motivo": "Sin reviews con estado APPROVED; revisión automática sin hallazgos REAL/CRÍTICO.", "ultima_actividad": "2026-09-15"}
+          {"numero": 38, "tipo": "pr", "titulo": "Agregar % de variación vs. período anterior al resumen (Issue #37)", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/pull/38", "motivo": "Sin ninguna review aprobada, sin mergear", "ultima_actividad": "2026-09-15"}
         ],
         "pendiente_de_aprobar": [],
         "recien_abierto_sin_plan": [
-          {"numero": 32, "tipo": "issue", "titulo": "[Consulta]: Porque a veces tarda en cargar el reporte de audiencia", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/32", "motivo": "Duplicado de #33, sin respuesta del asesor todavía.", "ultima_actividad": "2026-09-10"},
-          {"numero": 27, "tipo": "issue", "titulo": "[Consulta]: carga", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/27", "motivo": "Sin respuesta del asesor todavía.", "ultima_actividad": "2026-09-10"}
+          {"numero": 32, "tipo": "issue", "titulo": "[Consulta]: Porque a veces tarda en cargar el reporte de audiencia", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/32", "motivo": "Duplicado de #33, sin respuesta del asesor todavía", "ultima_actividad": "2026-09-10"},
+          {"numero": 27, "tipo": "issue", "titulo": "[Consulta]: carga", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/27", "motivo": "Duplicado de #28, sin respuesta del asesor todavía", "ultima_actividad": "2026-09-10"}
         ],
         "estancado": [
-          {"numero": 37, "tipo": "issue", "titulo": "[Solicitud]:", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/37", "motivo": "Plan aprobado e implementado vía PR #38 (aún sin mergear); sin actividad desde el 15/09.", "ultima_actividad": "2026-09-15", "esfuerzo": "grande", "decidido_por_coordinador": true},
-          {"numero": 33, "tipo": "issue", "titulo": "[Consulta]: Porque a veces tarda en cargar el reporte de audiencia", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/33", "motivo": "Asesor diagnosticó la causa (doble pasada en Audiencia) el 10/09; sin actividad posterior.", "ultima_actividad": "2026-09-10"},
-          {"numero": 28, "tipo": "issue", "titulo": "[Consulta]: carga ds", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/28", "motivo": "Asesor diagnosticó lentitud en getTopProducts (doble pasada + agregación JSON) el 10/09; sin actividad posterior.", "ultima_actividad": "2026-09-10"}
+          {"numero": 37, "tipo": "issue", "titulo": "[Solicitud]:", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/37", "motivo": "Plan aprobado e implementado vía PR #38, sin actividad nueva", "ultima_actividad": "2026-09-15", "esfuerzo": "grande", "decidido_por_coordinador": true},
+          {"numero": 36, "tipo": "issue", "titulo": "[Solicitud]: tooltip", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/36", "motivo": "Plan aprobado, verificado sin cambios necesarios, sin actividad nueva", "ultima_actividad": "2026-09-14", "esfuerzo": "chico", "decidido_por_coordinador": true},
+          {"numero": 33, "tipo": "issue", "titulo": "[Consulta]: Porque a veces tarda en cargar el reporte de audiencia", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/33", "motivo": "Respondida por el asesor, sin actividad nueva", "ultima_actividad": "2026-09-10"},
+          {"numero": 28, "tipo": "issue", "titulo": "[Consulta]: carga ds", "url": "https://github.com/Juanjorodriguez09/Bi_fabrica/issues/28", "motivo": "Respondida por el asesor, sin actividad nueva", "ultima_actividad": "2026-09-10"}
         ]
       },
       "completado_ayer": []
@@ -28,23 +28,23 @@
       "nombre": "WebChat_Fabrica",
       "categorias": {
         "pausado_esperando_decision": [
-          {"numero": 19, "tipo": "issue", "titulo": "[Solicitud]: Cambiar el emoji de bienvenida del Chat por uno distinto", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/19", "motivo": "Plan generado con pregunta abierta (qué emoji elegir); sin respuesta humana ni /aprobar.", "ultima_actividad": "2026-09-10", "esfuerzo": "chico"},
-          {"numero": 14, "tipo": "issue", "titulo": "[Solicitud]: prueba de funcionamiento del flujo de n8n con Telegram", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/14", "motivo": "Issue sin relación con este repo; el agente pregunta si corresponde cerrarlo o reabrirlo en el repo correcto.", "ultima_actividad": "2026-08-26"},
-          {"numero": 13, "tipo": "issue", "titulo": "[Solicitud]: Prueba de Telegram para mirar el flujo no va a hacer nada", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/13", "motivo": "Issue de prueba del canal Telegram; el agente pregunta si corresponde cerrarlo sin acción.", "ultima_actividad": "2026-08-26"},
-          {"numero": 12, "tipo": "issue", "titulo": "[Solicitud]: Esto sólo es una prueba desde N8N para probar las peticiones", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/12", "motivo": "Issue de prueba de conectividad de n8n; el agente pide confirmación humana explícita para cerrarlo.", "ultima_actividad": "2026-08-26"},
-          {"numero": 11, "tipo": "issue", "titulo": "[Solicitud]: Nuevo", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/11", "motivo": "Objetivo del Issue es solo la palabra 'Nuevo', sin alcance determinable; el agente recomienda cerrarlo o completarlo.", "ultima_actividad": "2026-08-26"},
-          {"numero": 10, "tipo": "issue", "titulo": "[Solicitud]: Esto es una prueba del voz de Telegram, no implementar nada real", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/10", "motivo": "Issue de prueba del canal de voz; el agente recomienda cerrarlo sin desarrollo.", "ultima_actividad": "2026-08-26"},
-          {"numero": 9, "tipo": "issue", "titulo": "[Solicitud]: Cambio desde n8n", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/9", "motivo": "Issue de prueba del formulario de n8n; el agente pregunta si corresponde cerrarlo.", "ultima_actividad": "2026-08-25"}
+          {"numero": 19, "tipo": "issue", "titulo": "[Solicitud]: Cambiar el emoji de bienvenida del Chat por uno distinto", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/19", "motivo": "El plan pide que un humano elija el emoji nuevo antes de aprobar", "ultima_actividad": "2026-09-10", "esfuerzo": "chico"},
+          {"numero": 14, "tipo": "issue", "titulo": "[Solicitud]: prueba de funcionamiento del flujo de n8n con Telegram", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/14", "motivo": "El planificador pregunta si corresponde cerrar el Issue (repo sin backend/n8n/Telegram) y reabrirlo en el repo correcto", "ultima_actividad": "2026-08-26"},
+          {"numero": 13, "tipo": "issue", "titulo": "[Solicitud]: Prueba de Telegram para mirar el flujo no va a hacer nada", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/13", "motivo": "Pregunta si cerrar como prueba/no-acción", "ultima_actividad": "2026-08-26"},
+          {"numero": 12, "tipo": "issue", "titulo": "[Solicitud]: Esto sólo es una prueba desde N8N para probar las peticiones", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/12", "motivo": "Pregunta si cerrar como prueba de conectividad de N8N", "ultima_actividad": "2026-08-26"},
+          {"numero": 11, "tipo": "issue", "titulo": "[Solicitud]: Nuevo", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/11", "motivo": "Pide completar Objetivo/Alcance/Contexto antes de continuar", "ultima_actividad": "2026-08-26"},
+          {"numero": 10, "tipo": "issue", "titulo": "[Solicitud]: Esto es una prueba del voz de Telegram, no implementar nada real", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/10", "motivo": "Pregunta si había un pedido real detrás de la prueba o si corresponde cerrar", "ultima_actividad": "2026-08-26"},
+          {"numero": 9, "tipo": "issue", "titulo": "[Solicitud]: Cambio desde n8n", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/9", "motivo": "Pregunta si cerrar como prueba completada sin acción", "ultima_actividad": "2026-08-25"}
         ],
         "pr_esperando_revision_merge": [
-          {"numero": 23, "tipo": "pr", "titulo": "Aclarar tooltip del botón de adjuntar (imagen o PDF)", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/pull/23", "motivo": "Sin reviews con estado APPROVED; revisión automática sin hallazgos.", "ultima_actividad": "2026-09-14"}
+          {"numero": 23, "tipo": "pr", "titulo": "Aclarar tooltip del botón de adjuntar (imagen o PDF)", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/pull/23", "motivo": "Sin ninguna review aprobada, sin mergear", "ultima_actividad": "2026-09-14"}
         ],
         "pendiente_de_aprobar": [],
         "recien_abierto_sin_plan": [],
         "estancado": [
-          {"numero": 22, "tipo": "issue", "titulo": "[Solicitud]:", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/22", "motivo": "Plan aprobado e implementado vía PR #23 (aún sin mergear); sin actividad nueva desde el 14/09.", "ultima_actividad": "2026-09-14", "esfuerzo": "chico", "decidido_por_coordinador": true},
-          {"numero": 20, "tipo": "issue", "titulo": "[Consulta]: Que operaciones puedo hacer en el chat?", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/20", "motivo": "Consulta respondida por el asesor; sin acción posterior.", "ultima_actividad": "2026-09-10"},
-          {"numero": 15, "tipo": "issue", "titulo": "[Consulta]:", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/15", "motivo": "Consulta respondida (token expuesto en el bundle); el agente sugiere una Solicitud de cambio coordinada con auth.micomercio.co si se decide avanzar, sin pregunta bloqueante.", "ultima_actividad": "2026-09-10"}
+          {"numero": 22, "tipo": "issue", "titulo": "[Solicitud]:", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/22", "motivo": "Plan aprobado e implementado vía PR #23, sin actividad nueva", "ultima_actividad": "2026-09-14", "esfuerzo": "chico", "decidido_por_coordinador": true},
+          {"numero": 20, "tipo": "issue", "titulo": "[Consulta]: Que operaciones puedo hacer en el chat?", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/20", "motivo": "Respondida por el asesor, sin actividad nueva", "ultima_actividad": "2026-09-10"},
+          {"numero": 15, "tipo": "issue", "titulo": "[Consulta]:", "url": "https://github.com/Juanjorodriguez09/WebChat_Fabrica/issues/15", "motivo": "Respondida por el asesor (proxy backend para el token), sin actividad nueva", "ultima_actividad": "2026-09-10"}
         ]
       },
       "completado_ayer": []
