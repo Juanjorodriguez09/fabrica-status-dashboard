@@ -1,22 +1,12 @@
 {
-  "generado_en": "2026-09-26T13:24:58-05:00",
+  "generado_en": "2026-09-26T14:03:39-05:00",
   "repos": [
     {
       "nombre": "jac-lapola",
       "categorias": {
         "pausado_esperando_decision": [],
         "pr_esperando_revision_merge": [],
-        "pendiente_de_aprobar": [
-          {
-            "numero": 3,
-            "tipo": "issue",
-            "titulo": "Nuevo aporte (Javier y Marina Luna, ramal Rocío)",
-            "url": "https://github.com/micomercio-ERP/jac-lapola/issues/3",
-            "motivo": "Plan aprobado e implementación disparada, pero un agente pidió el medio de pago (dato obligatorio no inventable); el humano respondió y posteó /ajustar con la respuesta (efectivo). Queda a la espera de que la Routine de ajuste lo procese.",
-            "ultima_actividad": "2026-09-26",
-            "esfuerzo": "chico"
-          }
-        ],
+        "pendiente_de_aprobar": [],
         "recien_abierto_sin_plan": [],
         "estancado": []
       },
@@ -34,13 +24,43 @@
           "tipo": "pr",
           "titulo": "Registrar aporte de Manuel (Finca Portugal) — folio 84",
           "url": "https://github.com/micomercio-ERP/jac-lapola/pull/2",
-          "motivo": "Mergeado; tests en verde (5 tests, 98 assertions, 0 fallos).",
+          "motivo": "Mergeado.",
+          "ultima_actividad": "2026-09-26"
+        },
+        {
+          "numero": 3,
+          "tipo": "issue",
+          "titulo": "[Solicitud]: Nuevo aporte",
+          "url": "https://github.com/micomercio-ERP/jac-lapola/issues/3",
+          "motivo": "Cerrado tras mergear el PR #4 que lo resolvía (quedó un /ajustar de por medio antes de aprobarse).",
+          "ultima_actividad": "2026-09-26"
+        },
+        {
+          "numero": 4,
+          "tipo": "pr",
+          "titulo": "Registrar aporte de Javier Calderón y Marina Luna (Finca El Guayabo 2) — folio 85",
+          "url": "https://github.com/micomercio-ERP/jac-lapola/pull/4",
+          "motivo": "Mergeado.",
+          "ultima_actividad": "2026-09-26"
+        },
+        {
+          "numero": 5,
+          "tipo": "issue",
+          "titulo": "[Solicitud]: Aporte Fredy Cristancho",
+          "url": "https://github.com/micomercio-ERP/jac-lapola/issues/5",
+          "motivo": "Cerrado tras mergear el PR #6 que lo resolvía.",
+          "ultima_actividad": "2026-09-26"
+        },
+        {
+          "numero": 6,
+          "tipo": "pr",
+          "titulo": "Registrar aporte de Fredy Cristancho (Finca El Oasis) — folio 86",
+          "url": "https://github.com/micomercio-ERP/jac-lapola/pull/6",
+          "motivo": "Mergeado.",
           "ultima_actividad": "2026-09-26"
         }
       ]
     }
   ],
-  "errores": [
-    "`gh` no estaba instalado en el entorno de esta corrida de la Routine (comando no encontrado). Se instaló vía `apt-get install -y gh` para completar el reporte con la vía prescrita, sin usar ningún conector alternativo para leer GitHub. Si el entorno no persiste este paquete entre corridas, este error se va a repetir mañana."
-  ]
+  "errores": []
 }
