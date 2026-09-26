@@ -1,5 +1,5 @@
 {
-  "generado_en": "2026-09-26T12:58:20-05:00",
+  "generado_en": "2026-09-26T13:24:58-05:00",
   "repos": [
     {
       "nombre": "jac-lapola",
@@ -10,9 +10,9 @@
           {
             "numero": 3,
             "tipo": "issue",
-            "titulo": "[Solicitud]: Nuevo aporte",
+            "titulo": "Nuevo aporte (Javier y Marina Luna, ramal Rocío)",
             "url": "https://github.com/micomercio-ERP/jac-lapola/issues/3",
-            "motivo": "Plan aprobado (/aprobar 17:13) disparó implementación; surgió una pregunta sobre el medio de pago, el humano respondió y posteó /ajustar (17:17), pero no hay ningún comentario del sistema confirmando que el ajuste fue recogido (a diferencia del /aprobar inicial, que generó confirmación automática en 11s) — pasaron ~45 min sin respuesta ni PR nuevo.",
+            "motivo": "Plan aprobado e implementación disparada, pero un agente pidió el medio de pago (dato obligatorio no inventable); el humano respondió y posteó /ajustar con la respuesta (efectivo). Queda a la espera de que la Routine de ajuste lo procese.",
             "ultima_actividad": "2026-09-26",
             "esfuerzo": "chico"
           }
@@ -26,7 +26,7 @@
           "tipo": "issue",
           "titulo": "[Solicitud]: Actualizar aportantes",
           "url": "https://github.com/micomercio-ERP/jac-lapola/issues/1",
-          "motivo": "Cerrado tras merge de PR #2",
+          "motivo": "Cerrado tras mergear el PR #2 que lo resolvía.",
           "ultima_actividad": "2026-09-26"
         },
         {
@@ -34,14 +34,13 @@
           "tipo": "pr",
           "titulo": "Registrar aporte de Manuel (Finca Portugal) — folio 84",
           "url": "https://github.com/micomercio-ERP/jac-lapola/pull/2",
-          "motivo": "Mergeado",
+          "motivo": "Mergeado; tests en verde (5 tests, 98 assertions, 0 fallos).",
           "ultima_actividad": "2026-09-26"
         }
       ]
     }
   ],
   "errores": [
-    "ISSUE_ESTADO_DIARIO no estaba seteada como variable de entorno en esta corrida; se usó el valor documentado en pm-diario.md (Issue #1 en fabrica-status) como fallback.",
-    "gh CLI no estaba instalado en el entorno al iniciar esta corrida; se instaló vía apt-get antes de continuar (no se usó ninguna vía alternativa como MCP o curl directo, según lo indicado en pm-diario.md)."
+    "`gh` no estaba instalado en el entorno de esta corrida de la Routine (comando no encontrado). Se instaló vía `apt-get install -y gh` para completar el reporte con la vía prescrita, sin usar ningún conector alternativo para leer GitHub. Si el entorno no persiste este paquete entre corridas, este error se va a repetir mañana."
   ]
 }
